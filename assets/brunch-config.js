@@ -36,17 +36,30 @@ exports.config = {
 
   // Phoenix paths configuration
   paths: {
-    // Dependencies and current project directories to watch
-    watched: ["static", "css", "js", "vendor"],
-    // Where to compile files to
+    // Dependencies and current project directories to watch.
+    watched: ["static", "css", "scss", "js", "vendor"],
+    // Where to compile files to.
     public: "../priv/static"
   },
 
-  // Configure your plugins
+  // Configure your plugins.
   plugins: {
     babel: {
-      // Do not use ES6 compiler in vendor code
+      presets: ["es2015", "react"],
+      // Do not use ES6 compiler in vendor code.
       ignore: [/vendor/]
+    },
+    copycat: {
+      // Copy node_modules/font-awesome/fonts/* to priv/static/fonts/.
+      "fonts": ["node_modules/font-awesome/fonts"]
+    },
+    sass: {
+      options: {
+        // Tell sass-brunch where to look for files to `@import`.
+        includePaths: ["node_modules/bootstrap/scss", "node_modules/font-awesome/scss"],
+        // Minimum precision required by bootstrap.
+        precision: 8
+      }
     }
   },
 
@@ -57,6 +70,17 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    whitelist: ["phoenix", "phoenix_html", "react", "react-dom"],
+    globals: {
+      // Bootstrap JavaScript requires both '$', 'jQuery', Tether, and Popper
+      // in global scope.
+      $: 'jquery',
+      jQuery: 'jquery',
+      Tether: 'tether',
+      Popper: 'popper.js',
+      // Require Bootstrap JavaScript globally too.
+      bootstrap: 'bootstrap'
+    }
   }
 };
