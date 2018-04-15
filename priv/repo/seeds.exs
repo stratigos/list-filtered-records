@@ -1,11 +1,9 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     RealDesigners.Repo.insert!(%RealDesigners.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+Code.require_file("designers_seed.ex", Path.expand("seed_data", __DIR__))
+
+alias RealDesigners.SeedData.DesignerSeed
+
+IO.puts "*** Seeding Database ***"
+
+DesignerSeed.insert_seed_designers()
+
+IO.puts "*** Database Seed Complete ***"
