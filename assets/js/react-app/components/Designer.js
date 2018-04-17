@@ -9,10 +9,11 @@ import PropTypes from "prop-types";
 const Designer = (props) => {
 
   return(
-    <div className="designer-card-container card border-secondary bg-dark">
+    <div className="designer-card-container card border-secondary bg-dark mt-4">
+      <img className="card-img-top" src={`https://robohash.org/${props.designer.id}`} alt="designer image" />
       <div className="card-body">
         <h5 className="card-title text-info">{props.designer.name}</h5>
-        <p>{props.designer.favorite ? "Favorite" : "Not Favorite"}</p>
+        <p className="card-text">{props.designer.favorite ? "Favorite" : "Not Favorite"}</p>
       </div>
     </div>
   );

@@ -1,8 +1,10 @@
 /* RealDesigners React App Global Styles */
 
+/** Global Element Style **/
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #111;
-  color: #AAAAAA;
+  background-color: $grey-dk;
+  color: $grey-lt;
 }
