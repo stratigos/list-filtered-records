@@ -1,17 +1,17 @@
 defmodule RealDesignersWeb.DesignerControllerTest do
   use RealDesignersWeb.ConnCase
 
-  alias RealDesigners.Designers
+  alias RealDesigners.Repo
   alias RealDesigners.Designers.Designer
+  alias RealDesigners.Assets.Image
 
-  @create_attrs %{favotire: true, name: "some name"}
-  @update_attrs %{favotire: false, name: "some updated name"}
-  @invalid_attrs %{favotire: nil, name: nil}
-
-  def fixture(:designer) do
-    {:ok, designer} = Designers.create_designer(@create_attrs)
-    designer
-  end
+  # Replace the following with proper fixtures or a factory library, i.e.,
+  # ExMachina. If persistent records are used, ensure `async: true` is
+  # removed above.
+  @image_a %Image{url: "http://example.com/456"}
+  @image_b %Image{url: "http://example.com/789"}
+  @designer_a %Designer{name: "Test Designer A", favotire: false, image: @image_a}
+  @designer_b %Designer{name: "Test Designer B", favotire: false, image: @image_b}
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -19,63 +19,23 @@ defmodule RealDesignersWeb.DesignerControllerTest do
 
   describe "index" do
     test "lists all designers", %{conn: conn} do
+      [designer_a, designer_b] = Enum.map([@designer_a, @designer_b], &Repo.insert!(&1))
+
+      # Replace with `Poison.encode!(designer)` once encode mapping is set.
+      expected_designers = [
+        %{"id" => designer_a.id,
+          "name" => designer_a.name,
+          "favotire" => designer_a.favotire,
+          "image_url" => designer_a.image.url},
+        %{"id" => designer_b.id,
+          "name" => designer_b.name,
+          "favotire" => designer_b.favotire,
+          "image_url" => designer_b.image.url}
+      ]
+
       conn = get conn, designer_path(conn, :index)
-      assert json_response(conn, 200)["data"] == []
+      assert json_response(conn, 200)["data"] == expected_designers
     end
   end
 
-  describe "create designer" do
-    test "renders designer when data is valid", %{conn: conn} do
-      conn = post conn, designer_path(conn, :create), designer: @create_attrs
-      assert %{"id" => id} = json_response(conn, 201)["data"]
-
-      conn = get conn, designer_path(conn, :show, id)
-      assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "favotire" => true,
-        "name" => "some name"}
-    end
-
-    test "renders errors when data is invalid", %{conn: conn} do
-      conn = post conn, designer_path(conn, :create), designer: @invalid_attrs
-      assert json_response(conn, 422)["errors"] != %{}
-    end
-  end
-
-  describe "update designer" do
-    setup [:create_designer]
-
-    test "renders designer when data is valid", %{conn: conn, designer: %Designer{id: id} = designer} do
-      conn = put conn, designer_path(conn, :update, designer), designer: @update_attrs
-      assert %{"id" => ^id} = json_response(conn, 200)["data"]
-
-      conn = get conn, designer_path(conn, :show, id)
-      assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "favotire" => false,
-        "name" => "some updated name"}
-    end
-
-    test "renders errors when data is invalid", %{conn: conn, designer: designer} do
-      conn = put conn, designer_path(conn, :update, designer), designer: @invalid_attrs
-      assert json_response(conn, 422)["errors"] != %{}
-    end
-  end
-
-  describe "delete designer" do
-    setup [:create_designer]
-
-    test "deletes chosen designer", %{conn: conn, designer: designer} do
-      conn = delete conn, designer_path(conn, :delete, designer)
-      assert response(conn, 204)
-      assert_error_sent 404, fn ->
-        get conn, designer_path(conn, :show, designer)
-      end
-    end
-  end
-
-  defp create_designer(_) do
-    designer = fixture(:designer)
-    {:ok, designer: designer}
-  end
 end

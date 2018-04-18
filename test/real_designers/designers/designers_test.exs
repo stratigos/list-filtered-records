@@ -5,6 +5,7 @@ defmodule RealDesigners.DesignersTest do
 
   describe "designers" do
     alias RealDesigners.Designers.Designer
+    alias RealDesigners.Assets.Image
 
     @valid_attrs %{favotire: true, name: "some name"}
     @update_attrs %{favotire: false, name: "some updated name"}
@@ -19,9 +20,28 @@ defmodule RealDesigners.DesignersTest do
       designer
     end
 
+    def designers_with_image_fixture() do
+      designer = designer_fixture()
+
+      %Image{url: "http://example.com", designer: designer}
+        |> Repo.insert!
+
+      Designer
+        |> preload(:image)
+        |> select([:id, :name, :favotire, image: [:url]])
+        |> order_by(:name)
+        |> Repo.all
+    end
+
     test "list_designers/0 returns all designers" do
       designer = designer_fixture()
       assert Designers.list_designers() == [designer]
+    end
+
+    test "list_designers_with_images/0 returns all designers with images" do
+      designers = designers_with_image_fixture()
+
+      assert Designers.list_designers_with_images() == designers
     end
 
     test "get_designer!/1 returns the designer with given id" do

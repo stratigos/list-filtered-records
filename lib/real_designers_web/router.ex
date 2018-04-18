@@ -22,7 +22,7 @@ defmodule RealDesignersWeb.Router do
   scope "/api", RealDesignersWeb do
     pipe_through :api
 
-    resources "/designers", DesignerController
+    resources "/designers", DesignerController, only: [:index]
   end
 
 end

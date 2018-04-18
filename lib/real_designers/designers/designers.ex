@@ -22,6 +22,24 @@ defmodule RealDesigners.Designers do
   end
 
   @doc """
+  Returns the list of Designer records, with their image url preloaded, sorted
+  alpha-numerically.
+
+  ## Examples
+
+      iex> list_designers_with_images()
+      [%Designer{}, ...]
+
+  """
+  def list_designers_with_images do
+    Designer
+      |> preload(:image)
+      |> select([:id, :name, :favotire, image: [:url]])
+      |> order_by(:name)
+      |> Repo.all
+  end
+
+  @doc """
   Gets a single designer.
 
   Raises `Ecto.NoResultsError` if the Designer does not exist.

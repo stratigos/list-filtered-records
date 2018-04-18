@@ -3,16 +3,13 @@ defmodule RealDesignersWeb.DesignerView do
   alias RealDesignersWeb.DesignerView
 
   def render("index.json", %{designers: designers}) do
-    %{data: render_many(designers, DesignerView, "designer.json")}
+    %{data: render_many(designers, DesignerView, "designer_with_image_url.json")}
   end
 
-  def render("show.json", %{designer: designer}) do
-    %{data: render_one(designer, DesignerView, "designer.json")}
-  end
-
-  def render("designer.json", %{designer: designer}) do
+  def render("designer_with_image_url.json", %{designer: designer}) do
     %{id: designer.id,
       name: designer.name,
-      favotire: designer.favotire}
+      favotire: designer.favotire,
+      image_url: designer.image.url}
   end
 end
