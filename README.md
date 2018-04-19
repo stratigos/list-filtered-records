@@ -14,7 +14,8 @@ List, sort, filter, and rate a large list of names.
 
 ## Hosting
 
- * The application can be viewed at https://listsearchfilter.herokuapp.com/ _(Heroku free tier - may need to wake from sleep)_ :shipit:
+ * The application can be viewed at https://listsearchfilter.herokuapp.com/ :shipit:
+   * _(Heroku free tier - may need to wake from sleep)_ 
  * Deployment is made possible with the Elixir and Phoenix [Heroku Buildpacks](https://hexdocs.pm/phoenix/heroku.html#adding-the-phoenix-static-buildpack) :droplet: :fire:
 
 ----
