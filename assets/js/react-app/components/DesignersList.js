@@ -1,6 +1,8 @@
 import React from "react";
 import Designer from "./Designer";
 
+import { FAV_STATUS_DEFAULT } from "../constants/defaults";
+
 /**
  * Select designer data to display based on application filter state.
  */
@@ -37,12 +39,32 @@ export const ltFilterDesigners = (designers, lessThanLength) => {
   return( designers.filter( designerRecord => designerRecord.designer.name.length < lessThanLength ) );
 };
 
+/**
+ * Select designer data where the designer's favorite status matches the
+ *  current app fav-filter state.
+ */
+export const favFilterDesigners = (designers, favStatus) => {
+
+  if (favStatus === FAV_STATUS_DEFAULT) {
+    return designers;
+  }
+
+  return ( designers.filter( designerRecord => designerRecord.designer.favorite === favStatus ) );
+
+};
+
+/**
+ * Produce a grid of Designer Components, filtered and sorted according to
+ *  the current application state. 
+ */
 const DesignersList = (props) => {
 
   let filteredDesigners = ltFilterDesigners(
     gtFilterDesigners(
       searchDesigners(
-        props.designers,
+        favFilterDesigners(
+          props.designers,
+          props.favStatus),
         props.searchQuery),
       props.greaterThanLength),
     props.lessThanLength);

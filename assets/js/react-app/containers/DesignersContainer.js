@@ -7,7 +7,8 @@ const mapStateToProps = (state) => ({
   designers: state.designers,
   searchQuery: state.searchQuery,
   greaterThanLength: state.greaterThanLength,
-  lessThanLength: state.lessThanLength
+  lessThanLength: state.lessThanLength,
+  favStatus: state.favStatus
 });
 
 const DesignersContainer = connect(mapStateToProps)(DesignersList);
