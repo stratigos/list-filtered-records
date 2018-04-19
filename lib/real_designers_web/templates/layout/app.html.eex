@@ -7,7 +7,7 @@
     <meta name="description" content="List, filter, and favorite a database of designers, with Phoenix 1.3 and React 16">
     <meta name="author" content="Todd Morningstar">
 
-    <title>Real Designers</title>
+    <title>List, Sort, and Filter Designers</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
