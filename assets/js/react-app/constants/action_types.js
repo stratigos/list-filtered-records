@@ -4,6 +4,7 @@
 
 // Application state.
 export const SET_DESIGNERS = "SET_DESIGNERS";
+export const SET_TEXT_SEARCH = "SET_TEXT_SEARCH";
 
 // Application utilities
 export const FORMAT_DESIGNERS = "FORMAT_DESIGNERS";

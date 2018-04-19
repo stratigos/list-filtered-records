@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import DesignersList from "../components/DesignersList";
 
 const mapStateToProps = (state) => ({
-  designers: state.designers
+  designers: state.designers,
+  searchQuery: state.searchQuery
 });
 
 const DesignersContainer = connect(mapStateToProps)(DesignersList);

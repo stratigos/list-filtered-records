@@ -1,5 +1,5 @@
-import { FETCH_DESIGNERS, FORMAT_DESIGNERS, SET_DESIGNERS } from '../constants/action_types';
-import { API_ENDPOINT_DESIGNERS } from '../constants/api_endpoints';
+import { FETCH_DESIGNERS, FORMAT_DESIGNERS, SET_DESIGNERS } from "../constants/action_types";
+import { API_ENDPOINT_DESIGNERS } from "../constants/api_endpoints";
 
 const fetchDesigners = () => ({
   type: FETCH_DESIGNERS,
