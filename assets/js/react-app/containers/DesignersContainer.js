@@ -5,7 +5,9 @@ import DesignersList from "../components/DesignersList";
 
 const mapStateToProps = (state) => ({
   designers: state.designers,
-  searchQuery: state.searchQuery
+  searchQuery: state.searchQuery,
+  greaterThanLength: state.greaterThanLength,
+  lessThanLength: state.lessThanLength
 });
 
 const DesignersContainer = connect(mapStateToProps)(DesignersList);

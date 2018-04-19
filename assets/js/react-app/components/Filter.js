@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import { SORT_ASC, SORT_DESC, SORT_LENGTH_LONG, SORT_LENGTH_SHORT } from "../constants/defaults";
 import setTextSearch from "../actions/set_text_search";
+import setGtFilter from "../actions/set_gt_filter";
+import setLtFilter from "../actions/set_lt_filter";
 
 /**
  * Provide a wrapper to the Redux store's `dispatch` method, such that the
@@ -22,8 +24,7 @@ let createSearchTextHandler = (dispatch) => {
  */
 let createSearchGreaterThanHandler = (dispatch) => {
   let searchGtHandler = (event) => {
-    console.log("SEARCH ~gt~ HANDLER CALLED: " + event.target.value);
-    // dispatch(updateGtSearchState(event.target.value)); // TODO MAKE THIS FSA
+    dispatch(setGtFilter(event.target.value));
   };
 
   return searchGtHandler;
@@ -34,8 +35,7 @@ let createSearchGreaterThanHandler = (dispatch) => {
  */
 let createSearchLessThanHandler = (dispatch) => {
   let searchLtHandler = (event) => {
-    console.log("SEARCH ~lt~ HANDLER CALLED: " + event.target.value);
-    // dispatch(updateLtSearchState(event.target.value)); // TODO MAKE THIS FSA
+    dispatch(setLtFilter(event.target.value));
   };
 
   return searchLtHandler;
