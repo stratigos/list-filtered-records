@@ -18,7 +18,7 @@ export const formatDesignersResponse = (backendResponseData) => {
           designer: {
             id: designer.id,
             name: designer.name,
-            favorite: designer.favorite
+            favorite: designer.favotire
           }
         }
       );

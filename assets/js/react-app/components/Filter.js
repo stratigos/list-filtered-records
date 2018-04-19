@@ -2,10 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { SORT_ASC, SORT_DESC, SORT_LENGTH_LONG, SORT_LENGTH_SHORT } from "../constants/defaults";
+import {
+  FAV_STATUS_FAV,
+  FAV_STATUS_UNFAV,
+  SORT_ASC,
+  SORT_DESC,
+  SORT_LENGTH_LONG,
+  SORT_LENGTH_SHORT
+} from "../constants/defaults";
+
 import setTextSearch from "../actions/set_text_search";
 import setGtFilter from "../actions/set_gt_filter";
 import setLtFilter from "../actions/set_lt_filter";
+import updateFavFilter from "../actions/update_fav_filter";
 
 /**
  * Provide a wrapper to the Redux store's `dispatch` method, such that the
@@ -45,24 +54,11 @@ let createSearchLessThanHandler = (dispatch) => {
  * Dispatch "show only favorites" Action.
  */
 let createUpdateFavHandler = (dispatch) => {
-  let searchFavHandler = () => {
-    console.log("LIST ~FAV~ORITED CALLED");
-    // dispatch(updateListFavState()); // TODO MAKE THIS FSA
+  let searchFavHandler = (favStatus) => {
+    dispatch(updateFavFilter(favStatus));
   };
 
   return searchFavHandler;
-};
-
-/**
- * Dispatch "show only not-yet-favorited" Action.
- */
-let createUpdateUnFavHandler = (dispatch) => {
-  let searchUnFavHandler = () => {
-    console.log("LIST ~UN~FAVORITED CALLED");
-    // dispatch(updateListUnFavState()); // TODO MAKE THIS FSA
-  };
-
-  return searchUnFavHandler;
 };
 
 /**
@@ -92,7 +88,6 @@ class Filter extends React.Component {
     this.updateGt = createSearchGreaterThanHandler(props.dispatch);
     this.updateLt = createSearchLessThanHandler(props.dispatch);
     this.updateFav = createUpdateFavHandler(props.dispatch);
-    this.updateUnFav = createUpdateUnFavHandler(props.dispatch);
     this.sortList = createSortHandler(props.dispatch);
   };
 
@@ -157,9 +152,23 @@ class Filter extends React.Component {
           </div>
 
           <div className="col-sm mb-1">
-            <button type="button" onClick={this.updateFav} className="btn btn-light">Favorited</button>
+            <button
+              type="button"
+              className="btn btn-light"
+              title="Select favorited"
+              onClick={() => this.updateFav(FAV_STATUS_FAV)}
+            >
+              <i className="fa fa-star"></i> Favs
+            </button>
             <span className="mx-2"></span>
-            <button type="button" onClick={this.updateUnFav} className="btn btn-dark">Unfavorited</button>
+            <button
+              type="button"
+              className="btn btn-dark"
+              title="Select not-yet favorited"
+              onClick={() => this.updateFav(FAV_STATUS_UNFAV)}
+            >
+              <i className="fa fa-star-o"></i> Not Favs
+            </button>
           </div>
 
           <div className="col-sm mb-1">
