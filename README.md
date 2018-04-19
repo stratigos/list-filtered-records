@@ -1,21 +1,21 @@
 # List Records
 
-List, sort, filter, and rate a large list of names. 
+List, sort, filter, and rate a large list of names.
 
- * :construction_worker: Under Construction :construction:
+ * :construction_worker: **Under Construction** :construction:
  * This application consists of a Phoenix 1.3.2 backend, and a React/Redux frontend. It allows listing of a large dataset, with controls to filter and sort the data.
 
 ## TODO
 
- * Implement Redux binding to filter by item name size, favorite status, and sort list
- * Add feature to favorite / unfavorite listed records
- * Create `mix` task to import and store ~7k schema records to be listed
- * Complete test coverage for front end
+ * Implement Redux binding to sort list :page_with_curl:
+ * Add feature to favorite / unfavorite listed records :star:
+ * Create `mix` task to import and store ~7k schema records to be listed :truck:
+ * Complete test coverage for front end :100:
 
 ## Hosting
 
- * The application can be viewed at https://listsearchfilter.herokuapp.com/ _(Heroku free tier - may need to wake from sleep)_
- * Deployment is made possible with the Elixir and Phoenix [Heroku Buildpacks](https://hexdocs.pm/phoenix/heroku.html#adding-the-phoenix-static-buildpack)
+ * The application can be viewed at https://listsearchfilter.herokuapp.com/ _(Heroku free tier - may need to wake from sleep)_ :shipit:
+ * Deployment is made possible with the Elixir and Phoenix [Heroku Buildpacks](https://hexdocs.pm/phoenix/heroku.html#adding-the-phoenix-static-buildpack) :droplet: :fire:
 
 ----
 
@@ -30,4 +30,3 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
