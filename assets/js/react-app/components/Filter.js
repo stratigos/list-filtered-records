@@ -15,6 +15,7 @@ import setTextSearch from "../actions/set_text_search";
 import setGtFilter from "../actions/set_gt_filter";
 import setLtFilter from "../actions/set_lt_filter";
 import updateFavFilter from "../actions/update_fav_filter";
+import setSortStyle from "../actions/set_sort_style";
 
 /**
  * Provide a wrapper to the Redux store's `dispatch` method, such that the
@@ -66,8 +67,7 @@ let createUpdateFavHandler = (dispatch) => {
  */
  let createSortHandler = (dispatch) => {
    let sortListHandler = (sortParam) => {
-     console.log("~SORT~ LIST CALLED: " + sortParam);
-     // dispatch(updateListSortState(sortParam)); // TODO MAKE THIS FSA
+     dispatch(setSortStyle(sortParam));
    };
 
    return sortListHandler;

@@ -9,6 +9,7 @@ export const SET_GT_FILTER = "SET_GT_FILTER";
 export const SET_LT_FILTER = "SET_LT_FILTER";
 export const SET_FAV_FILTER = "SET_FAV_FILTER";
 export const UPDATE_FAV_FILTER = "UPDATE_FAV_FILTER";
+export const SET_SORT_STYLE = "SET_SORT_STYLE";
 
 // Application utilities
 export const FORMAT_DESIGNERS = "FORMAT_DESIGNERS";

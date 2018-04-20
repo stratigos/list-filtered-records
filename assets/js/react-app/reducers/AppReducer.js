@@ -6,6 +6,7 @@ import filterTextReducer from "./filter_text_reducer";
 import filterGtReducer from "./filter_gt_reducer";
 import filterLtReducer from "./filter_lt_reducer";
 import filterFavReducer from "./filter_fav_reducer";
+import sortStyleReducer from "./sort_style_reducer";
 
 const AppReducer = combineReducers({
   designers: designersReducer,
@@ -13,6 +14,7 @@ const AppReducer = combineReducers({
   greaterThanLength: filterGtReducer,
   lessThanLength: filterLtReducer,
   favStatus: filterFavReducer,
+  sortStyle: sortStyleReducer,
   loading: backendLoadingReducer
 });
 
