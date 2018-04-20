@@ -7,15 +7,14 @@ List, sort, filter, and rate a large list of names.
 
 ## TODO
 
- * Implement Redux binding to sort list :page_with_curl:
  * Add feature to favorite / unfavorite listed records :star:
- * Create `mix` task to import and store ~7k schema records to be listed :truck:
+ * Create `mix` task to import and store ~7k schema records to be listed :page_with_curl:
  * Complete test coverage for front end :100:
 
 ## Hosting
 
  * The application can be viewed at https://listsearchfilter.herokuapp.com/ :shipit:
-   * _(Heroku free tier - may need to wake from sleep)_ 
+   * _(Heroku free tier - may need to wake from sleep)_
  * Deployment is made possible with the Elixir and Phoenix [Heroku Buildpacks](https://hexdocs.pm/phoenix/heroku.html#adding-the-phoenix-static-buildpack) :droplet: :fire:
 
 ----
