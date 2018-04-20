@@ -8,7 +8,8 @@ const mapStateToProps = (state) => ({
   searchQuery: state.searchQuery,
   greaterThanLength: state.greaterThanLength,
   lessThanLength: state.lessThanLength,
-  favStatus: state.favStatus
+  favStatus: state.favStatus,
+  sortStyle: state.sortStyle
 });
 
 const DesignersContainer = connect(mapStateToProps)(DesignersList);

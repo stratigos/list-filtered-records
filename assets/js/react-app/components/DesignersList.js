@@ -1,7 +1,13 @@
 import React from "react";
 import Designer from "./Designer";
 
-import { FAV_STATUS_DEFAULT } from "../constants/defaults";
+import {
+  FAV_STATUS_DEFAULT,
+  SORT_ASC,
+  SORT_DESC,
+  SORT_LENGTH_LONG,
+  SORT_LENGTH_SHORT
+} from "../constants/defaults";
 
 /**
  * Select designer data to display based on application filter state.
@@ -53,9 +59,51 @@ export const favFilterDesigners = (designers, favStatus) => {
 
 };
 
+export const sortNameAsc = (a,b) => {
+  const aName = a.designer.name.toUpperCase();
+  const bName = b.designer.name.toUpperCase();
+
+  if ( aName > bName ) {
+    return 1;
+  } else if (aName < bName) {
+    return -1;
+  }
+
+  return 0;
+};
+
+export const sortNameDesc = (a,b) => {
+  return sortNameAsc(a,b) * -1;
+};
+
+export const sortNameLengthAsc = (a,b) => {
+  return a.designer.name.length - b.designer.name.length;
+};
+
+export const sortNameLengthDesc = (a,b) => {
+  return sortNameLengthAsc(a,b) * -1;
+};
+
+export const sortDesigners = (designers, sortStyle) => {
+
+  switch (sortStyle) {
+    case SORT_ASC:
+      return [...designers].sort(sortNameAsc);
+    case SORT_DESC:
+      return [...designers].sort(sortNameDesc);
+    case SORT_LENGTH_LONG:
+      return [...designers].sort(sortNameLengthAsc);
+    case SORT_LENGTH_SHORT:
+      return [...designers].sort(sortNameLengthDesc);
+    default:
+      return designers;
+  }
+
+};
+
 /**
  * Produce a grid of Designer Components, filtered and sorted according to
- *  the current application state. 
+ *  the current application state.
  */
 const DesignersList = (props) => {
 
@@ -71,7 +119,7 @@ const DesignersList = (props) => {
 
   return(
     <div className="designers-list-container d-flex flex-wrap justify-content-around">
-      {filteredDesigners.map( (designerRecord) => {
+      {sortDesigners(filteredDesigners, props.sortStyle).map( (designerRecord) => {
         return(<Designer key={designerRecord.designer.id} designer={designerRecord.designer} />);
       })}
     </div>
