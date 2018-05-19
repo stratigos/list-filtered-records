@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import updateDesignerFav from "../actions/update_designer_fav";
 
 /**
  * Provide a wrapper to the Redux store's `dispatch` method, such that the
@@ -8,8 +9,8 @@ import { connect } from "react-redux";
  */
 let createToggleFavHandler = (dispatch) => {
   let toggleFavHandler = (designer_id, designer_fav) => {
-    // dispatch(updateDesignerFav(designer_id, designer_fav));
-    console.log(`TOGGLING FAVORITE STATUS FOR ${designer_id} TO ${designer_fav}`);
+    dispatch(updateDesignerFav(designer_id, designer_fav));
+    console.log(`TOGGLING FAVORITE STATUS FOR ${designer_id} TO ${designer_fav}`); // DEBUG TODO REMOVE
   };
 
   return toggleFavHandler;
