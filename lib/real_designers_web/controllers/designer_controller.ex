@@ -17,7 +17,7 @@ defmodule RealDesignersWeb.DesignerController do
     with {:ok, %Designer{} = designer} <- 
       Designers.update_designer(designer, %{favotire: !designer.favotire})
     do
-      render(conn, "designer_with_image_url.json", designer: designer)
+      render(conn, "fav.json", designer: designer)
     end
   end
 
