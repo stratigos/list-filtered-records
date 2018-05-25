@@ -53,7 +53,12 @@ defmodule RealDesigners.Designers do
       ** (Ecto.NoResultsError)
 
   """
-  def get_designer!(id), do: Repo.get!(Designer, id)
+  def get_designer!(id) do
+    Designer
+      |> preload(:image)
+      |> select([:id, :name, :favotire, image: [:url]])
+      |> Repo.get!(id)
+  end
 
   @doc """
   Creates a designer.
