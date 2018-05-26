@@ -2,7 +2,10 @@
  * Load data from the Phoenix backend app.
  ******************************************************************************/
 
-import { FETCH_DESIGNERS } from "../constants/action_types";
+import {
+  FETCH_DESIGNERS, 
+  UPDATE_DESIGNER_FAV
+} from "../constants/action_types";
 import { BASE_URL } from "../constants/api_endpoints";
 import backendApiError from "../actions/backend_api_error";
 import backendApiStart from "../actions/backend_api_start";
@@ -14,8 +17,7 @@ import backendApiDone from "../actions/backend_api_done";
  */
 const backendApiMiddleWare = ({ dispatch }) => next => action => {
 
-  // Pass through if not an API call.
-  if( [ FETCH_DESIGNERS ].indexOf(action.type) === -1 ) {
+  if( [ FETCH_DESIGNERS, UPDATE_DESIGNER_FAV ].indexOf(action.type) === -1 ) {
     next(action);
     return;
   }
@@ -24,7 +26,7 @@ const backendApiMiddleWare = ({ dispatch }) => next => action => {
 
   dispatch( backendApiStart() );
 
-  fetch(BASE_URL + payload.url)
+  fetch(BASE_URL + payload.url, { method: getVerbFromPayload(payload) })
     .then(response => {
       if (response.status >= 300) {
 
@@ -39,7 +41,10 @@ const backendApiMiddleWare = ({ dispatch }) => next => action => {
             dispatch( backendApiDone() );
             dispatch({
               type: payload.success,
-              payload: { success: payload.apiResponseFormatAction, data: response.data }
+              payload: {
+                success: payload.apiResponseFormatAction,
+                data: response.data
+              }
             });
 
           })
@@ -52,6 +57,10 @@ const backendApiMiddleWare = ({ dispatch }) => next => action => {
 
     });
 
+};
+
+export const getVerbFromPayload = (payload) => {
+  return payload.http_verb == undefined ? "GET" : payload.http_verb;
 };
 
 export default backendApiMiddleWare;

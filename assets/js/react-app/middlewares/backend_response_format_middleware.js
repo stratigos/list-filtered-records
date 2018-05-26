@@ -10,6 +10,10 @@ import { FORMAT_DESIGNERS } from "../constants/action_types";
  */
 export const formatDesignersResponse = (backendResponseData) => {
 
+  if (!Array.isArray(backendResponseData)) {
+    backendResponseData = [backendResponseData];
+  }
+
   return (
     backendResponseData.map( (designer) => {
       return (

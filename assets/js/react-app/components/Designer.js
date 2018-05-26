@@ -10,7 +10,6 @@ import updateDesignerFav from "../actions/update_designer_fav";
 let createToggleFavHandler = (dispatch) => {
   let toggleFavHandler = (designer_id, designer_fav) => {
     dispatch(updateDesignerFav(designer_id, designer_fav));
-    console.log(`TOGGLING FAVORITE STATUS FOR ${designer_id} TO ${designer_fav}`); // DEBUG TODO REMOVE
   };
 
   return toggleFavHandler;
