@@ -59,11 +59,11 @@ defmodule RealDesigners.Designers do
   Documenting the obvious is silly, and prone to rot. This is the last of these
   comments, and soon theyll all be deleted. Thank you.
   """
-  def get_designer_with_image(id) do
+  def get_designer_with_image!(id) do
     Designer
       |> preload(:image)
       |> select([:id, :name, :favotire, image: [:url]])
-      |> Repo.get(id)
+      |> Repo.get!(id)
   end
 
   @doc """
